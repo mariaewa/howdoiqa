@@ -1,0 +1,1129 @@
+  [1m[36m (25.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (2.8ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateUsers (20150213213020)
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (19.3ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.0ms)[0m  CREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")
+  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150213213020"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCountries (20150215153713)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.9ms)[0m  [1mCREATE TABLE "countries" ("id" serial primary key, "name" character varying(255), "code" character varying(255)) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150215153713"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mUser Exists (2.2ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'admin@example.com' LIMIT 1[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2019-02-01 13:27:07.781777"], ["email", "admin@example.com"], ["encrypted_password", "$2a$10$PzPlwpscuLlv.Rm.vXkImepd7uRUPDWABLRTQ/HNI4BdhSP1BlMgi"], ["updated_at", "2019-02-01 13:27:07.781777"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "countries" ("code", "name") VALUES ($1, $2) RETURNING "id"[0m  [["code", "PL"], ["name", "Poland"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (223.5ms)[0m  [1mDROP DATABASE IF EXISTS "howdoiqa_test"[0m
+  [1m[35m (478.0ms)[0m  CREATE DATABASE "howdoiqa_test" ENCODING = 'utf8'
+  [1m[36m (205.8ms)[0m  [1mDROP DATABASE IF EXISTS "howdoiqa_test"[0m
+  [1m[35m (416.1ms)[0m  CREATE DATABASE "howdoiqa_test" ENCODING = 'utf8'
+  [1m[36mSQL (1.0ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (7.2ms)[0m  CREATE TABLE "countries" ("id" serial primary key, "name" character varying(255), "code" character varying(255)) 
+  [1m[36m (4.0ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")
+  [1m[36m (1.9ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (1.2ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.4ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150215153713')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150213213020')
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-01 14:28:12 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (2.5ms)
+  Rendered pages/test_0.html.haml within layouts/application (17.6ms)
+  Rendered layouts/_navbar.html.haml (8.3ms)
+  Rendered layouts/_flash_messages.html.haml (2.9ms)
+  Rendered layouts/_sidebar.html.haml (3.4ms)
+Completed 200 OK in 1919ms (Views: 1907.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-04 09:29:42 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (4.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (2.9ms)
+  Rendered pages/test_0.html.haml within layouts/application (23.9ms)
+  Rendered layouts/_navbar.html.haml (8.1ms)
+  Rendered layouts/_flash_messages.html.haml (2.9ms)
+  Rendered layouts/_sidebar.html.haml (3.3ms)
+Completed 200 OK in 234ms (Views: 224.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-04 09:32:21 +0100
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (1.4ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 70ms (Views: 68.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-02-04 09:32:24 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/mariabrylka/.rvm/gems/ruby-2.1.5/gems/devise-4.5.0/app/views/devise/shared/_links.html.erb (1.2ms)
+  Rendered /Users/mariabrylka/.rvm/gems/ruby-2.1.5/gems/devise-4.5.0/app/views/devise/sessions/new.html.erb within layouts/application (38.4ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 122ms (Views: 107.4ms | ActiveRecord: 4.9ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-02-04 09:32:45 +0100
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"3YKGkiQqQjqFsFRaDrWZVs/G0wttiCBMDdhvrSamcW8=", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"1"}, "commit"=>"Log in"}
+  [1m[35mUser Load (4.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'admin@example.com'  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (3.8ms)[0m  UPDATE "users" SET "remember_created_at" = $1, "updated_at" = $2 WHERE "users"."id" = 1  [["remember_created_at", "2019-02-04 08:32:45.446846"], ["updated_at", "2019-02-04 08:32:45.447875"]]
+  [1m[36m (1.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "users" SET "current_sign_in_at" = $1, "current_sign_in_ip" = $2, "last_sign_in_at" = $3, "last_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = 1[0m  [["current_sign_in_at", "2019-02-04 08:32:45.460779"], ["current_sign_in_ip", "127.0.0.1/32"], ["last_sign_in_at", "2019-02-04 08:32:45.460779"], ["last_sign_in_ip", "127.0.0.1/32"], ["sign_in_count", 1], ["updated_at", "2019-02-04 08:32:45.462200"]]
+  [1m[35m (1.5ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 115ms (ActiveRecord: 12.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-04 09:32:45 +0100
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (0.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.5ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 75ms (Views: 74.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-04 12:02:19 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (2.4ms)
+  Rendered pages/test_0.html.haml within layouts/application (16.1ms)
+  [1m[35mUser Load (0.9ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (19.5ms)
+  Rendered layouts/_flash_messages.html.haml (2.9ms)
+  Rendered layouts/_sidebar.html.haml (2.4ms)
+Completed 200 OK in 231ms (Views: 218.6ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-02-04 12:04:02 +0100
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (4.6ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.5ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 75ms (Views: 73.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-02-04 12:06:28 +0100
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (1.3ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.5ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 79ms (Views: 77.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-02-04 12:07:43 +0100
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.3ms)
+  Rendered pages/test_1.html.haml within layouts/application (1.3ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 75ms (Views: 73.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-02-04 12:07:58 +0100
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (7.7ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.2ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 84ms (Views: 82.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-02-04 12:11:48 +0100
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.9ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 71ms (Views: 70.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/pages/test_2" for 127.0.0.1 at 2019-02-04 12:15:02 +0100
+Processing by PagesController#test_2 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RCwDWOaNPvR3HYuqoQcICJN5XKE/0DPHB/orzaChRwA=", "example_textfield"=>"eatha", "example_select"=>"Opt 1", "commit"=>"Submit"}
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.6ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.2ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 83ms (Views: 69.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-02-04 12:15:09 +0100
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.7ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 80ms (Views: 79.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-02-04 12:20:18 +0100
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (1.1ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 75ms (Views: 74.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-04 12:32:05 +0100
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.2ms)
+  Rendered pages/test_0.html.haml within layouts/application (1.1ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 75ms (Views: 74.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-02-04 12:32:09 +0100
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (1.0ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 71ms (Views: 70.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-02-04 12:47:13 +0100
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (2.4ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.5ms)
+  Rendered layouts/_flash_messages.html.haml (0.2ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 78ms (Views: 77.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/pages/test_2" for 127.0.0.1 at 2019-02-04 13:31:45 +0100
+Processing by PagesController#test_2 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RCwDWOaNPvR3HYuqoQcICJN5XKE/0DPHB/orzaChRwA=", "example_textfield"=>"eah", "example_checkbox"=>"1", "example_select"=>"Opt 2", "commit"=>"Submit"}
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (2.1ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.8ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 83ms (Views: 81.4ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/pages/test_2" for 127.0.0.1 at 2019-02-04 13:31:48 +0100
+Processing by PagesController#test_2 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RCwDWOaNPvR3HYuqoQcICJN5XKE/0DPHB/orzaChRwA=", "example_textfield"=>"", "example_select"=>"Opt 1", "example_radiobutton"=>"opt 1", "commit"=>"Submit"}
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (2.2ms)
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (2.1ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 79ms (Views: 76.9ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/pages/test_2" for 127.0.0.1 at 2019-02-04 13:31:54 +0100
+Processing by PagesController#test_2 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RCwDWOaNPvR3HYuqoQcICJN5XKE/0DPHB/orzaChRwA=", "example_textfield"=>"erg", "example_checkbox"=>"1", "example_select"=>"Opt 2", "example_radiobutton"=>"opt 1", "commit"=>"Submit"}
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.8ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 76ms (Views: 75.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/pages/test_2" for 127.0.0.1 at 2019-02-04 13:32:11 +0100
+Processing by PagesController#test_2 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RCwDWOaNPvR3HYuqoQcICJN5XKE/0DPHB/orzaChRwA=", "example_textfield"=>"Maria", "example_checkbox"=>"1", "example_select"=>"Opt 2", "example_radiobutton"=>"opt 2", "commit"=>"Submit"}
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.9ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 72ms (Views: 71.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/pages/test_2" for 127.0.0.1 at 2019-02-04 13:55:06 +0100
+Processing by PagesController#test_2 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RCwDWOaNPvR3HYuqoQcICJN5XKE/0DPHB/orzaChRwA=", "example_textfield"=>"", "example_select"=>"Opt 1", "commit"=>"Submit"}
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.7ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 74ms (Views: 71.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-02-04 13:55:48 +0100
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.7ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 75ms (Views: 74.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_3" for 127.0.0.1 at 2019-02-04 13:59:53 +0100
+Processing by PagesController#test_3 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_3.html.haml within layouts/application (4.7ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.2ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 81ms (Views: 80.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_3" for 127.0.0.1 at 2019-02-04 14:01:44 +0100
+Processing by PagesController#test_3 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_3.html.haml within layouts/application (0.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 76ms (Views: 74.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-02-04 14:25:06 +0100
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.7ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 75ms (Views: 74.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pages/test_3" for 127.0.0.1 at 2019-02-04 14:25:10 +0100
+Processing by PagesController#test_3 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_3.html.haml within layouts/application (0.8ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.6ms)
+Completed 200 OK in 76ms (Views: 75.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pages/test_3" for 127.0.0.1 at 2019-02-04 14:37:03 +0100
+Processing by PagesController#test_3 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_3.html.haml within layouts/application (0.9ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.6ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 73ms (Views: 71.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_3" for 127.0.0.1 at 2019-02-04 14:47:35 +0100
+Processing by PagesController#test_3 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_3.html.haml within layouts/application (0.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 75ms (Views: 74.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_4" for 127.0.0.1 at 2019-02-04 15:43:16 +0100
+Processing by PagesController#test_4 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_4.html.haml within layouts/application (4.4ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.5ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 85ms (Views: 83.5ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-02-04 15:46:43 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-02-04 15:46:45 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-02-04 15:46:45 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-02-04 15:48:21 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_4" for 127.0.0.1 at 2019-02-04 15:48:24 +0100
+Processing by PagesController#test_4 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_4.html.haml within layouts/application (0.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 80ms (Views: 79.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-02-04 15:48:27 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-02-04 15:52:29 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-02-04 15:52:30 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_5" for 127.0.0.1 at 2019-02-04 16:00:49 +0100
+Processing by PagesController#test_5 as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_5.html.haml within layouts/application (5.8ms)
+  Rendered layouts/_navbar.html.haml (0.2ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 90ms (Views: 84.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-05 11:54:49 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (2.3ms)
+  Rendered pages/test_0.html.haml within layouts/application (12.5ms)
+  [1m[35mUser Load (0.9ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "users" SET "current_sign_in_at" = $1, "sign_in_count" = $2, "updated_at" = $3 WHERE "users"."id" = 1  [["current_sign_in_at", "2019-02-05 10:54:49.349696"], ["sign_in_count", 2], ["updated_at", "2019-02-05 10:54:49.350873"]]
+  [1m[36m (2.6ms)[0m  [1mCOMMIT[0m
+  Rendered layouts/_navbar.html.haml (36.0ms)
+  Rendered layouts/_flash_messages.html.haml (3.1ms)
+  Rendered layouts/_sidebar.html.haml (3.1ms)
+Completed 200 OK in 240ms (Views: 224.5ms | ActiveRecord: 7.2ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-02-05 11:54:51 +0100
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (4.3ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 74ms (Views: 73.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-02-05 11:54:53 +0100
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (13.5ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 90ms (Views: 89.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pages/test_3" for 127.0.0.1 at 2019-02-05 11:54:55 +0100
+Processing by PagesController#test_3 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_3.html.haml within layouts/application (5.1ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.6ms)
+  Rendered layouts/_flash_messages.html.haml (0.2ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 84ms (Views: 83.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/pages/test_4" for 127.0.0.1 at 2019-02-05 11:54:56 +0100
+Processing by PagesController#test_4 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_4.html.haml within layouts/application (4.7ms)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.2ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 79ms (Views: 78.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_5" for 127.0.0.1 at 2019-02-05 11:54:58 +0100
+Processing by PagesController#test_5 as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_5.html.haml within layouts/application (5.8ms)
+  Rendered layouts/_navbar.html.haml (0.2ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 86ms (Views: 82.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2019-02-05 12:00:49 +0100
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "users" SET "remember_created_at" = $1, "updated_at" = $2 WHERE "users"."id" = 1[0m  [["remember_created_at", nil], ["updated_at", "2019-02-05 11:00:49.017714"]]
+  [1m[35m (2.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 15ms (ActiveRecord: 3.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-05 12:00:49 +0100
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (0.8ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.2ms)
+  Rendered layouts/_sidebar.html.haml (0.5ms)
+Completed 200 OK in 69ms (Views: 68.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-05 12:00:51 +0100
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (1.1ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.5ms)
+Completed 200 OK in 69ms (Views: 68.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_5" for 127.0.0.1 at 2019-02-05 12:00:55 +0100
+Processing by PagesController#test_5 as HTML
+Completed 401 Unauthorized in 1ms
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-02-05 12:00:55 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/mariabrylka/.rvm/gems/ruby-2.1.5/gems/devise-4.5.0/app/views/devise/shared/_links.html.erb (1.3ms)
+  Rendered /Users/mariabrylka/.rvm/gems/ruby-2.1.5/gems/devise-4.5.0/app/views/devise/sessions/new.html.erb within layouts/application (15.1ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 93ms (Views: 91.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-02-05 12:04:21 +0100
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ds+hirKx1iC5oT9RhBRR+nSiP+ZQK+l609H7evBtfSo=", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'admin@example.com'  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "users" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "users"."id" = 1[0m  [["current_sign_in_at", "2019-02-05 11:04:22.048585"], ["last_sign_in_at", "2019-02-05 10:54:49.349696"], ["sign_in_count", 3], ["updated_at", "2019-02-05 11:04:22.049282"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/pages/test_5
+Completed 302 Found in 78ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/pages/test_5" for 127.0.0.1 at 2019-02-05 12:04:22 +0100
+Processing by PagesController#test_5 as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_5.html.haml within layouts/application (1.2ms)
+  Rendered layouts/_navbar.html.haml (0.2ms)
+  Rendered layouts/_flash_messages.html.haml (0.2ms)
+  Rendered layouts/_sidebar.html.haml (0.5ms)
+Completed 200 OK in 92ms (Views: 90.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2019-02-05 12:13:36 +0100
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 4ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-05 12:13:36 +0100
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (0.9ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.2ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 73ms (Views: 73.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-02-05 12:13:38 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/mariabrylka/.rvm/gems/ruby-2.1.5/gems/devise-4.5.0/app/views/devise/shared/_links.html.erb (0.3ms)
+  Rendered /Users/mariabrylka/.rvm/gems/ruby-2.1.5/gems/devise-4.5.0/app/views/devise/sessions/new.html.erb within layouts/application (3.5ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 79ms (Views: 78.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-02-05 12:22:05 +0100
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RcB2ch6YQPrYrra8eohOWTS4jKyEgna3omumHTe8G1g=", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'admin@example.com'  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE "users" SET "current_sign_in_at" = $1, "last_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "users"."id" = 1[0m  [["current_sign_in_at", "2019-02-05 11:22:05.513634"], ["last_sign_in_at", "2019-02-05 11:04:22.048585"], ["sign_in_count", 4], ["updated_at", "2019-02-05 11:22:05.514345"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 63ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-05 12:22:05 +0100
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (1.0ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 73ms (Views: 71.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pages/test_5" for 127.0.0.1 at 2019-02-05 12:22:06 +0100
+Processing by PagesController#test_5 as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_5.html.haml within layouts/application (1.0ms)
+  Rendered layouts/_navbar.html.haml (0.2ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 74ms (Views: 72.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_6" for 127.0.0.1 at 2019-02-05 12:30:47 +0100
+Processing by PagesController#test_6 as HTML
+  [1m[36mSomeModule::Country Load (1.6ms)[0m  [1mSELECT "countries".* FROM "countries"[0m
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_6.html.haml within layouts/application (10.2ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.8ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 88ms (Views: 81.5ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/pages/test_6" for 127.0.0.1 at 2019-02-05 12:38:00 +0100
+Processing by PagesController#test_6 as HTML
+  [1m[36mSomeModule::Country Load (0.4ms)[0m  [1mSELECT "countries".* FROM "countries"[0m
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_6.html.haml within layouts/application (2.2ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_navbar.html.haml (1.6ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 77ms (Views: 75.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/pages/test_5" for 127.0.0.1 at 2019-02-05 12:38:30 +0100
+Processing by PagesController#test_5 as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_5.html.haml within layouts/application (1.3ms)
+  Rendered layouts/_navbar.html.haml (0.2ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 77ms (Views: 74.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/test_6" for 127.0.0.1 at 2019-02-05 12:54:57 +0100
+Processing by PagesController#test_6 as HTML
+  [1m[35mSomeModule::Country Load (0.3ms)[0m  SELECT "countries".* FROM "countries"
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_6.html.haml within layouts/application (2.0ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered layouts/_navbar.html.haml (1.7ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 77ms (Views: 75.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-07 09:31:03 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (5.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (2.5ms)
+  Rendered pages/test_0.html.haml within layouts/application (19.2ms)
+  Rendered layouts/_navbar.html.haml (8.6ms)
+  Rendered layouts/_flash_messages.html.haml (3.4ms)
+  Rendered layouts/_sidebar.html.haml (2.9ms)
+Completed 200 OK in 221ms (Views: 211.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-03-07 09:31:09 +0100
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (4.6ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 73ms (Views: 72.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-07 09:31:33 +0100
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (1.2ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 98ms (Views: 97.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_0" for 127.0.0.1 at 2019-03-07 09:34:24 +0100
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (1.0ms)
+  Rendered layouts/_navbar.html.haml (0.5ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 76ms (Views: 75.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-03-07 09:35:05 +0100
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (0.9ms)
+  Rendered layouts/_navbar.html.haml (0.6ms)
+  Rendered layouts/_flash_messages.html.haml (0.2ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 69ms (Views: 68.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-03-07 09:36:24 +0100
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (8.2ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 82ms (Views: 81.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-08 13:28:58 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (2.4ms)
+  Rendered pages/test_0.html.haml within layouts/application (14.6ms)
+  Rendered layouts/_navbar.html.haml (8.1ms)
+  Rendered layouts/_flash_messages.html.haml (3.3ms)
+  Rendered layouts/_sidebar.html.haml (3.9ms)
+Completed 200 OK in 205ms (Views: 196.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_3" for 127.0.0.1 at 2019-03-08 13:29:00 +0100
+Processing by PagesController#test_3 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_3.html.haml within layouts/application (5.4ms)
+  Rendered layouts/_navbar.html.haml (0.5ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 83ms (Views: 81.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_4" for 127.0.0.1 at 2019-03-08 13:29:02 +0100
+Processing by PagesController#test_4 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_4.html.haml within layouts/application (5.4ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 81ms (Views: 80.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-03-08 13:29:03 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-03-08 13:29:05 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_4" for 127.0.0.1 at 2019-03-08 13:29:07 +0100
+Processing by PagesController#test_4 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_4.html.haml within layouts/application (0.9ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 80ms (Views: 79.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-03-08 13:29:10 +0100
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-04-19 14:17:25 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (2.7ms)
+  Rendered pages/test_0.html.haml within layouts/application (13.5ms)
+  Rendered layouts/_navbar.html.haml (8.3ms)
+  Rendered layouts/_flash_messages.html.haml (3.0ms)
+  Rendered layouts/_sidebar.html.haml (2.8ms)
+Completed 200 OK in 198ms (Views: 189.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-04-19 14:20:15 +0200
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (4.8ms)
+  Rendered layouts/_navbar.html.haml (0.6ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 77ms (Views: 76.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-04-23 13:15:28 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (3.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (3.0ms)
+  Rendered pages/test_0.html.haml within layouts/application (18.0ms)
+  Rendered layouts/_navbar.html.haml (6.9ms)
+  Rendered layouts/_flash_messages.html.haml (3.4ms)
+  Rendered layouts/_sidebar.html.haml (2.4ms)
+Completed 200 OK in 227ms (Views: 216.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-04-23 13:16:36 +0200
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (4.3ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 74ms (Views: 72.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-04-23 13:16:38 +0200
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (7.4ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 86ms (Views: 85.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_2" for 127.0.0.1 at 2019-04-23 13:29:21 +0200
+Processing by PagesController#test_2 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"agWzg2FoQ6PgUP8qrBSvuGzQWQG5HYbVFZSgwfsWSEw=", "example_textfield"=>"", "example_select"=>"Opt 2", "example_radiobutton"=>"opt 2", "commit"=>"Submit"}
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.8ms)
+  Rendered layouts/_navbar.html.haml (0.5ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 89ms (Views: 77.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_2" for 127.0.0.1 at 2019-04-23 13:41:05 +0200
+Processing by PagesController#test_2 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"agWzg2FoQ6PgUP8qrBSvuGzQWQG5HYbVFZSgwfsWSEw=", "example_textfield"=>"", "example_select"=>"Opt 2", "example_radiobutton"=>"opt 1", "commit"=>"Submit"}
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (2.3ms)
+  Rendered layouts/_navbar.html.haml (0.5ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 83ms (Views: 80.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-04-23 13:41:09 +0200
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (1.9ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 75ms (Views: 74.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_3" for 127.0.0.1 at 2019-04-23 14:21:06 +0200
+Processing by PagesController#test_3 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_3.html.haml within layouts/application (4.9ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 81ms (Views: 80.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_4" for 127.0.0.1 at 2019-04-23 14:21:27 +0200
+Processing by PagesController#test_4 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_4.html.haml within layouts/application (4.9ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 82ms (Views: 81.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-04-23 14:23:56 +0200
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-04-23 14:24:01 +0200
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_4" for 127.0.0.1 at 2019-04-23 14:24:04 +0200
+Processing by PagesController#test_4 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_4.html.haml within layouts/application (1.2ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 76ms (Views: 75.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/pages/test_4" for 127.0.0.1 at 2019-04-23 14:24:06 +0200
+Processing by PagesController#test_4 as */*
+  Parameters: {"trigger"=>"ajax-call"}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_5" for 127.0.0.1 at 2019-04-23 14:30:22 +0200
+Processing by PagesController#test_5 as HTML
+Completed 401 Unauthorized in 5ms
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-04-23 14:30:22 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/mariabrylka/.rvm/gems/ruby-2.1.5/gems/devise-4.6.2/app/views/devise/shared/_links.html.erb (1.3ms)
+  Rendered /Users/mariabrylka/.rvm/gems/ruby-2.1.5/gems/devise-4.6.2/app/views/devise/sessions/new.html.erb within layouts/application (14.3ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 111ms (Views: 91.3ms | ActiveRecord: 11.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 12:19:59 +0200
+
+PGError - could not connect to server: Connection refused
+	Is the server running on host "localhost" (::1) and accepting
+	TCP/IP connections on port 5432?
+could not connect to server: Connection refused
+	Is the server running on host "localhost" (127.0.0.1) and accepting
+	TCP/IP connections on port 5432?
+:
+
+
+
+Started POST "/__better_errors/86a47310af18789b/variables" for 127.0.0.1 at 2019-05-07 12:19:59 +0200
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 12:22:19 +0200
+
+PGError - could not connect to server: Connection refused
+	Is the server running on host "localhost" (::1) and accepting
+	TCP/IP connections on port 5432?
+could not connect to server: Connection refused
+	Is the server running on host "localhost" (127.0.0.1) and accepting
+	TCP/IP connections on port 5432?
+:
+
+
+
+Started POST "/__better_errors/6ca7072c96d992f4/variables" for 127.0.0.1 at 2019-05-07 12:22:20 +0200
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 12:24:09 +0200
+
+PGError - FATAL:  role "howdoiqa" does not exist
+:
+
+
+
+Started POST "/__better_errors/01b737d274ecd585/variables" for 127.0.0.1 at 2019-05-07 12:24:10 +0200
+
+
+Started POST "/__better_errors/01b737d274ecd585/variables" for 127.0.0.1 at 2019-05-07 12:24:20 +0200
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 12:25:29 +0200
+
+PGError - FATAL:  role "howdoiqa" does not exist
+:
+
+
+
+Started POST "/__better_errors/c7c79592d69fbcd1/variables" for 127.0.0.1 at 2019-05-07 12:25:29 +0200
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 12:37:02 +0200
+
+PGError - FATAL:  role "howdoiqa" does not exist
+:
+
+
+
+Started POST "/__better_errors/e159ed6beb5060a6/variables" for 127.0.0.1 at 2019-05-07 12:37:03 +0200
+
+
+Started POST "/__better_errors/e159ed6beb5060a6/variables" for 127.0.0.1 at 2019-05-07 12:39:46 +0200
+  [1m[36m (4.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.5ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateUsers (20150213213020)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (4.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.0ms)[0m  CREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")
+  [1m[36m (1.0ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150213213020"]]
+  [1m[36m (1.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCountries (20150215153713)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "countries" ("id" serial primary key, "name" character varying(255), "code" character varying(255)) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150215153713"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.5ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mUser Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'admin@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", "2019-05-07 10:46:13.227225"], ["email", "admin@example.com"], ["encrypted_password", "$2a$10$zyr2Nd5FpRlLCkR4OUwk/OQzNDWK/hH/bIFh1LkAXmvu1wkPCLHEm"], ["updated_at", "2019-05-07 10:46:13.227225"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "countries" ("code", "name") VALUES ($1, $2) RETURNING "id"[0m  [["code", "PL"], ["name", "Poland"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (208.2ms)[0m  [1mDROP DATABASE IF EXISTS "howdoiqa_test"[0m
+  [1m[35m (372.1ms)[0m  CREATE DATABASE "howdoiqa_test" ENCODING = 'utf8'
+  [1m[36m (205.8ms)[0m  [1mDROP DATABASE IF EXISTS "howdoiqa_test"[0m
+  [1m[35m (398.2ms)[0m  CREATE DATABASE "howdoiqa_test" ENCODING = 'utf8'
+  [1m[36mSQL (0.4ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (6.6ms)[0m  CREATE TABLE "countries" ("id" serial primary key, "name" character varying(255), "code" character varying(255)) 
+  [1m[36m (4.5ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.3ms)[0m  CREATE UNIQUE INDEX  "index_users_on_email" ON "users" USING btree ("email")
+  [1m[36m (1.0ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users" USING btree ("reset_password_token")[0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) 
+  [1m[36m (1.1ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.4ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150215153713')[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150213213020')
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 12:47:57 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (2.5ms)
+  Rendered pages/test_0.html.haml within layouts/application (17.1ms)
+  Rendered layouts/_navbar.html.haml (7.4ms)
+  Rendered layouts/_flash_messages.html.haml (2.9ms)
+  Rendered layouts/_sidebar.html.haml (2.8ms)
+Completed 200 OK in 217ms (Views: 208.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 12:55:50 +0200
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (1.4ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 96ms (Views: 95.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 13:37:58 +0200
+Processing by PagesController#test_0 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_0.html.haml within layouts/application (1.0ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 80ms (Views: 78.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_1" for 127.0.0.1 at 2019-05-07 13:38:00 +0200
+Processing by PagesController#test_1 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_1.html.haml within layouts/application (4.4ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 81ms (Views: 80.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_2" for 127.0.0.1 at 2019-05-07 13:38:02 +0200
+Processing by PagesController#test_2 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_2.html.haml within layouts/application (7.5ms)
+  Rendered layouts/_navbar.html.haml (0.3ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.4ms)
+Completed 200 OK in 86ms (Views: 84.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/pages/test_3" for 127.0.0.1 at 2019-05-07 13:38:03 +0200
+Processing by PagesController#test_3 as HTML
+  Rendered common/_footer.html.haml (0.1ms)
+  Rendered pages/test_3.html.haml within layouts/application (5.4ms)
+  Rendered layouts/_navbar.html.haml (0.4ms)
+  Rendered layouts/_flash_messages.html.haml (0.1ms)
+  Rendered layouts/_sidebar.html.haml (0.3ms)
+Completed 200 OK in 87ms (Views: 86.2ms | ActiveRecord: 0.0ms)

@@ -1,0 +1,8 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#test-3-table {
+  tr.highlighted {
+    background-color: yellow;
+  }
+}

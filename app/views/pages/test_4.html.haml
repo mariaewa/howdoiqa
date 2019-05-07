@@ -1,0 +1,22 @@
+.col-md-12#test
+  %h1 Test #4 - pages with ajax calls
+  %p
+    Time to test interacting an element which makes an asynchronous call to the server (via AJAX)
+  %h3 Your task
+  %p
+    Write a test that checks if the data got updated after clicking the button.
+  %p
+    Steps:
+    %ul
+      %li Remember to mark the specs with 'js: true'.
+  %h3 Things we learn in this step:
+  %p
+    %ul
+      %li= link_to 'waiting for ajax with capybara', 'https://github.com/jnicklas/capybara#asynchronous-javascript-ajax-and-friends'
+  %h2 Subject of test:
+  %p
+    = link_to 'Click me to fire an AJAX call', '#', class: 'btn btn-default', id: 'test-4-ajax-btn'
+  %p#ajax-result
+    %strong Text of this element should change after call completes.
+
+= render 'common/footer', next_link: test_5_pages_path

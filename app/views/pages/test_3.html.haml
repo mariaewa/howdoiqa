@@ -1,0 +1,32 @@
+.col-md-12#test
+  %h1 Test #3 - pages with basic js
+  %p
+    Now we will interact with elements enhanced with some simple javascript.
+  %h3 Your task
+  %p
+    Write a test that checks if highlight got added to row after clicking it.
+  %p
+    Steps:
+    %ul
+      %li Remember to mark the specs with 'js: true'.
+      %li The table below has a selector written as text - you can use this selector to get the table row you want.
+      %li Click the row and check that it has correct css with 'have_css' method.
+      %li Right click element and inspect it to see what css class is assigned when the method is highlighted.
+  %h3 Things we learn in this step:
+  %p
+    %ul
+      %li= link_to 'js: true', 'https://github.com/jnicklas/capybara#using-capybara-with-rspec'
+      %li first and last selectors
+      %li have_css method
+  %h2 Subject of test:
+  %p
+    This is a table:
+    %table.table.table-bordered#test-3-table
+      %tr
+        %td
+          First row, selector: "first(:xpath, '//table//tr')" or "first('table tr')"
+      %tr
+        %td
+          Last row, selector: "all('table tr').last"
+
+= render 'common/footer', next_link: test_4_pages_path

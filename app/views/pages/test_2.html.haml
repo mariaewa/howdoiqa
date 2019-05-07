@@ -1,0 +1,50 @@
+.col-md-12#test
+  %h1 Test #2 - forms
+  %p
+    Here is the first form to interact with
+
+  %h3 Your task
+  %p
+    Write a test that will:
+    %ul
+      %li fill out the form - all options must be filled in or it won't pass validation
+      %li check if submitting the data displays it later in the "The submitted data" section
+      %li check if flash message got displayed - both for error and success
+      %li check if correct message (under 'The submitted data' section lower) displays when you visited page and didn't submit anything
+
+  %h3 Things we learn in this step:
+  %ul
+    %li= link_to 'interacting with forms', 'https://github.com/jnicklas/capybara#interacting-with-forms'
+
+  %h2 Subject of test:
+  %h3 The form
+  %p
+    = form_tag test_2_pages_path, method: :post do
+      .form-group
+        = label_tag :example_textfield
+        = text_field_tag :example_textfield
+      .form-group
+        = label_tag :example_checkbox
+        = check_box_tag :example_checkbox
+      .form-group
+        = label_tag :example_select
+        = select_tag :example_select, options_for_select([ 'Opt 1', 'Opt 2' ])
+      .form-group
+        = label_tag :example_radiobutton_opt_1
+        = radio_button_tag :example_radiobutton, 'opt 1'
+        = label_tag :example_radiobutton_opt_2
+        = radio_button_tag :example_radiobutton, 'opt 2'
+      .form-group
+        = submit_tag 'Submit'
+
+  %h3 The submitted data
+  - if @test_form.present?
+    %ul
+      %li Submitted text: #{@test_form.filled_text}
+      %li Checkbox checked: #{@test_form.checked_box}
+      %li Select option picked: #{@test_form.selected_option}
+      %li Radio option picked: #{@test_form.picked_rb}
+  - else
+    %p Data will appear here after submission.
+
+= render 'common/footer', next_link: test_3_pages_path
